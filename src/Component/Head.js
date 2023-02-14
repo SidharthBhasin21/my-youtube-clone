@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { toggleMenu } from "../utils/appSlice";
-
+import { Link } from "react-router-dom";
 const Head = () => {
   const dispatch = useDispatch();
 
