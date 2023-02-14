@@ -21,13 +21,13 @@ const Head = () => {
         <img
           alt="Logo"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
-          className="h-8 mx-5 cursor-pointer"
+          className="h-8 mx-5 cursor-pointer "
         />
       </div>
       <div className="col-span-10">
         <input
           type="text"
-          className="w-1/2 border border-gray-400 p-2 rounded-l-full"
+          className="w-1/2 border border-gray-400 p-2 px-4 rounded-l-full"
         />
         <button className="p-2 border border-gray-400 rounded-r-full">
           Search
