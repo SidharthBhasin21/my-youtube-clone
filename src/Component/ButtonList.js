@@ -3,6 +3,7 @@ import Button from "./Button";
 
 const ButtonList = () => {
   const list = [
+    "All",
     "coding",
     "Java",
     "Js",
