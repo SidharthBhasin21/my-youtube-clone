@@ -56,7 +56,7 @@ const Head = () => {
           <button className="p-2 border border-gray-400 rounded-r-full">
             Search
           </button>
-          {showSuggestions && (
+          {showSuggestions && suggestions.length ? (
             <div className="fixed bg-white py-2 w-[33rem] rounded-lg border ">
               <ul>
                 {suggestions.map((suggestion, index) => (
@@ -69,7 +69,7 @@ const Head = () => {
                 ))}
               </ul>
             </div>
-          )}
+          ) : null}
         </div>
       </div>
       <div className="col-span-1">
