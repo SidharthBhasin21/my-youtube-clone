@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { toggleMenu } from "../utils/appSlice";
-import { Link } from "react-router-dom";
+import { YOUTUBE_SEARCH_API } from "../utils/constants";
 const Head = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions]
+
+  useEffect(() => {
+    // getSearchSuggestions();
+
+    const timer = setTimeout(() => getSearchSuggestions(), 300);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
   const dispatch = useDispatch();
+
+  const getSearchSuggestions = async () => {
+    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+    // console.log(json[1]);
+    setSuggestions(json[1]);
+  };
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
@@ -25,13 +45,28 @@ const Head = () => {
         />
       </div>
       <div className="col-span-10">
-        <input
-          type="text"
-          className="w-1/2 border border-gray-400 p-2 px-4 rounded-l-full"
-        />
-        <button className="p-2 border border-gray-400 rounded-r-full">
-          Search
-        </button>
+        <div>
+          <input
+            type="text"
+            className="w-1/2 border border-gray-400 p-2 px-4 rounded-l-full"
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button className="p-2 border border-gray-400 rounded-r-full">
+            Search
+          </button>
+          <div className="fixed bg-white py-2 w-[33rem] rounded-lg border ">
+            <ul>
+              {suggestions.map((suggestion, index) => (
+                <li
+                  key={index}
+                  className=" px-4 py-1 shadow-sm hover:bg-gray-100  "
+                >
+                  {suggestion}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
       <div className="col-span-1">
         <img
