@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ChatMessage from "./ChatMessage";
 import { addMessages } from "../utils/chatSlice";
 import { randomName, randomMessage } from "../utils/helper";
 const LiveChat = () => {
+  const [liveChatText, setLiveChatText] = useState("");
   const dispatch = useDispatch();
   const chatMessages = useSelector((store) => store.chat.messages);
 
@@ -27,6 +28,31 @@ const LiveChat = () => {
           return <ChatMessage name={message.name} message={message.message} />;
         })}
       </div>
+      <form
+        className="py-2 my-5 w-full border"
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(
+            addMessages({
+              name: "Sidharth",
+              message: liveChatText,
+            })
+          );
+          setLiveChatText("");
+        }}
+      >
+        <input
+          className="w-3/4"
+          type="text"
+          value={liveChatText}
+          onChange={(e) => {
+            setLiveChatText(e.target.value);
+          }}
+        />
+        <button className="px-5 mx-2 border bg-slate-200 rounded-lg">
+          Send
+        </button>
+      </form>
     </div>
   );
 };
